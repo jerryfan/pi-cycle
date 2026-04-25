@@ -1,0 +1,49 @@
+{
+  "name": "pi-cycle",
+  "version": "0.1.0",
+  "description": "Pi extension: /cycle + hotkey cycles model+thinking profiles (OpenAI-focused) with a menu-based config UI.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerryfan/pi-cycle.git"
+  },
+  "homepage": "https://github.com/jerryfan/pi-cycle",
+  "bugs": {
+    "url": "https://github.com/jerryfan/pi-cycle/issues"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "extension",
+    "cycle",
+    "model",
+    "thinking",
+    "presets",
+    "openai"
+  ],
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "files": [
+    "index.ts",
+    "README.md",
+    "FEATURES.md",
+    "SPEC.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "RELEASE.md",
+    "LICENSE",
+    "example.json",
+    "AGENTS.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-ai": "*",
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-tui": "*"
+  }
+}

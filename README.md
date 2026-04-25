@@ -1,0 +1,146 @@
+# pi-cycle
+
+[![npm](https://img.shields.io/npm/v/pi-cycle?style=flat)](https://www.npmjs.com/package/pi-cycle)
+[![license](https://img.shields.io/npm/l/pi-cycle?style=flat)](./LICENSE)
+[![stars](https://img.shields.io/github/stars/jerryfan/pi-cycle?style=social)](https://github.com/jerryfan/pi-cycle)
+
+One hotkey + one command to switch **work modes** in Pi by cycling **model + thinking level together**.
+
+- Hotkey: **F8** (default) → cycle next profile
+- Command: **`/cycle`** → menu UI (all actions live under `/cycle ...`)
+
+If this helps your daily Pi loop, star the repo → it directly drives maintenance time.
+
+---
+
+## Demo (VHS)
+
+This repo includes a `demo.tape` for [VHS](https://github.com/charmbracelet/vhs).
+
+To render a GIF locally:
+
+```bash
+vhs demo.tape
+# outputs: demo.gif
+```
+
+---
+
+## Install
+
+Install with **Pi**, not npm:
+
+```bash
+pi install npm:pi-cycle
+```
+
+Then in Pi:
+
+```text
+/reload
+```
+
+Project-local install (shared via `.pi/settings.json`):
+
+```bash
+pi install -l npm:pi-cycle
+```
+
+---
+
+## Quickstart
+
+- Open the menu: `/cycle`
+- Cycle next: press `F8` (or `/cycle next`)
+- Pick a specific profile: `/cycle pick`
+- Configure profiles/hotkey: `/cycle config`
+- Self-check: `/cycle doctor`
+
+---
+
+## Default OpenAI profile cycle
+
+| Order | Profile | Model | Thinking | Good for |
+|---:|---|---|---|---|
+| 1 | `deep` | `openai-codex/gpt-5.5` | `xhigh` | Specs, architecture, high-stakes review |
+| 2 | `code` | `openai-codex/gpt-5.3-codex` | `high` | Implementation, debugging, refactors |
+| 3 | `general` | `openai-codex/gpt-5.4` | `medium` | Everyday questions + balanced deep work |
+| 4 | `fast` | `openai-codex/gpt-5.4-mini` | `low` | Quick iterations and small edits |
+| 5 | `value` | `openai-codex/gpt-5.2` | `medium` | Throughput / value mode |
+
+Tip: `gpt-5.3-codex-spark` is usually best as a dedicated **spark** profile (fast coding-oriented, **no images**, smaller context) rather than your general daily mode.
+
+---
+
+## Commands
+
+- `/cycle` (menu)
+- `/cycle next`
+- `/cycle pick` (UI required)
+- `/cycle config` (UI required)
+- `/cycle doctor`
+- `/cycle help`
+- `/cycle <name>` (direct set)
+
+---
+
+## Config
+
+Config file:
+- `~/.pi/agent/pi-cycle.json`
+
+Migration note:
+- `pi-cycle` will also read legacy config at `~/.pi/agent/py-cycle.json` if present.
+- Any save action writes to `pi-cycle.json`.
+
+No-UI behavior:
+- If Pi is running without interactive UI, `/cycle` falls back to cycling `next`.
+- `/cycle pick` and `/cycle config` require interactive UI.
+
+### Adaptive thinking cap (optional)
+
+`pi-cycle` can optionally **cap thinking** when the current session context window is nearly full.
+This helps avoid surprises near the limit.
+
+Configure via:
+- `/cycle config` → `low-context`
+
+Note: this uses **context window usage**, not provider billing quota.
+
+---
+
+## Troubleshooting
+
+- **Installed but `/cycle` is unknown**
+  - run `/reload` (or restart Pi)
+
+- **Model activation errors** (e.g. “model not supported with this account”)
+  - remove that model from the cycle via `/cycle config`
+  - run `/cycle doctor` to see which profile is failing
+
+- **Hotkey doesn’t fire**
+  - some terminals don’t transmit certain key combos reliably
+  - change it via `/cycle config` → `hotkey` (reload required)
+
+---
+
+## Development
+
+Local dev install:
+
+```bash
+pi install -l <path-to-pi-cycle>
+```
+
+Then in Pi:
+
+```text
+/reload
+/cycle
+```
+
+---
+
+## License
+
+MIT

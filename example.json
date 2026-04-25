@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "hotkey": "f8",
+  "lowContext": {
+    "enabled": false,
+    "thresholdRemainingPercent": 10,
+    "capThinkingLevel": "low"
+  },
+  "active": "deep",
+  "profiles": [
+    {
+      "name": "deep",
+      "provider": "openai-codex",
+      "model": "gpt-5.5",
+      "thinkingLevel": "xhigh",
+      "blurb": "Best for specs, architecture, and high-stakes review."
+    },
+    {
+      "name": "code",
+      "provider": "openai-codex",
+      "model": "gpt-5.3-codex",
+      "thinkingLevel": "high",
+      "blurb": "Best for implementation, debugging, and refactors."
+    },
+    {
+      "name": "general",
+      "provider": "openai-codex",
+      "model": "gpt-5.4",
+      "thinkingLevel": "medium",
+      "blurb": "Best for everyday questions and balanced deep work."
+    },
+    {
+      "name": "fast",
+      "provider": "openai-codex",
+      "model": "gpt-5.4-mini",
+      "thinkingLevel": "low",
+      "blurb": "Best for quick iterations and small edits."
+    },
+    {
+      "name": "value",
+      "provider": "openai-codex",
+      "model": "gpt-5.2",
+      "thinkingLevel": "medium",
+      "blurb": "Best for throughput when you want solid answers at lower cost."
+    }
+  ]
+}
