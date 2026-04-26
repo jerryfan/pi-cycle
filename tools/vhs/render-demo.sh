@@ -28,6 +28,12 @@ mkdir -p "$HOME_DIR" "$AGENT_DIR" "$CAP_DIR" "$STILLS_DIR" "$TAPES_DIR"
 export HOME="$HOME_DIR"
 export PI_CODING_AGENT_DIR="$AGENT_DIR"
 export PI_ONELINER_PRESET="${PI_ONELINER_PRESET:-ultra}"
+
+# Make `pi install npm:<pkg>` work without sudo on Linux by using a writable npm global prefix.
+export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+mkdir -p "$NPM_CONFIG_PREFIX" "$NPM_CONFIG_PREFIX/bin"
+
 # Only needed so model activation doesn't fail on missing key during demo.
 # The demo never sends requests.
 export OPENAI_API_KEY="${OPENAI_API_KEY:-demo}"
@@ -53,22 +59,18 @@ s.collapseChangelog = true;
 fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
 NODE
 
-PI_ONELINER_SOURCE="${PI_ONELINER_SOURCE:-}"
-if [[ -z "$PI_ONELINER_SOURCE" ]]; then
-  # Default to npm, but auto-fallback to a monorepo checkout if it exists (useful in WSL).
-  if [[ -d "/mnt/c/code/pi/public/pi-oneliner" ]]; then
-    PI_ONELINER_SOURCE="/mnt/c/code/pi/public/pi-oneliner"
-  else
-    PI_ONELINER_SOURCE="npm:pi-oneliner"
-  fi
-fi
+PI_ONELINER_SOURCE="${PI_ONELINER_SOURCE:-npm:pi-oneliner}"
 
 if ! pi install "$PI_ONELINER_SOURCE" >/dev/null; then
-  echo "failed: pi install $PI_ONELINER_SOURCE" >&2
-  echo "Tip: on some Linux installs, npm global installs require sudo." >&2
-  echo "Set PI_ONELINER_SOURCE to a local checkout path, e.g.:" >&2
-  echo "  PI_ONELINER_SOURCE=/path/to/pi-oneliner bash tools/vhs/render-demo.sh" >&2
-  exit 2
+  # Fallback for monorepo-based dev environments.
+  if [[ -d "/mnt/c/code/pi/public/pi-oneliner" ]]; then
+    pi install "/mnt/c/code/pi/public/pi-oneliner" >/dev/null
+  else
+    echo "failed: pi install $PI_ONELINER_SOURCE" >&2
+    echo "Tip: set PI_ONELINER_SOURCE to a local checkout path, e.g.:" >&2
+    echo "  PI_ONELINER_SOURCE=/path/to/pi-oneliner bash tools/vhs/render-demo.sh" >&2
+    exit 2
+  fi
 fi
 
 profiles=(deep code general fast value)
