@@ -5,14 +5,14 @@ version: 0.1.0
 status: public-ready
 owner: jerry
 created_at: 2026-04-25
-updated_at: 2026-04-25
+updated_at: 2026-04-26
 review_due: 2026-06-25
 change_policy: minor
 source_of_truth: true
 tags: [pi, extension, openai, model, thinking, hotkey, presets, workflow]
 risk_tier: low
 distribution: public
-quality_rating: 97/100
+quality_rating: 98/100
 ---
 
 # pi-cycle — Product + Implementation Spec
@@ -53,6 +53,17 @@ Measured by:
    - Missing auth/model produces a warning, not a silent no-op or crash.
 6. **Public-ready by default**
    - Copy/paste install, stable command vocabulary, local config, low support burden.
+
+### 1.4 Growth North Star (GitHub stars)
+Stars are treated as a **lagging indicator of real utility + trust**, not as the primary goal.
+
+**Outcome:** A new Pi user can land on the repo/README, install `pi-cycle`, successfully switch modes, and understand what changed **within 60 seconds**, and feels confident enough to star/recommend.
+
+**Measured by (practical proxies):**
+- **Time-to-first-mode-switch:** install → `/reload` → press `F8` (or `/cycle next`) works on the first try.
+- **Self-serve debuggability:** if something fails, `/cycle doctor` yields an actionable report without requiring maintainer back-and-forth.
+- **Low support burden:** issues are reproducible and include doctor output; docs answer the top FAQs.
+- **Trust signals present:** demo GIF, clear limitations (e.g. context vs billing quota), minimal CI, changelog/release plan.
 
 ---
 
@@ -332,14 +343,29 @@ This rubric measures both product fit and implementation readiness. A public rel
 | Determinism and persistence | 10 | Cycle order is explicit, stable, and persisted locally; active profile is remembered without auto-mutating startup state. | 10/10 |
 | Feedback and observability | 10 | Activation produces visible feedback (notification) with a clear 1-sentence blurb. | 10/10 |
 | Failure handling | 10 | Missing model/auth/config issues warn clearly and do not crash the session. | 9/10 |
-| Public packaging/docs | 10 | Package metadata, README, spec, feature doc, changelog, license, and workspace integration are present. | 9/10 |
+| Public packaging/docs | 10 | Package metadata, README, spec, feature doc, changelog, license, demo media, and workspace integration are present. | 10/10 |
 
-**Current score: 97/100**
+**Current score: 98/100**
 
 ### 11.1 Remaining points to reach 100/100
-- Add automated smoke/typing checks for the extension package.
-- Make the model picker display rich model metadata inside the selection UI, not just in implementation internals.
-- Expand README with the default profile table and a troubleshooting section.
+- Add an automated smoke check that at least loads the extension in a real Pi session (CI-friendly if feasible).
+- Consider richer model metadata in the model picker UI (optional polish).
+
+### 11.2 GitHub stars success rubric (repo readiness)
+This rubric measures how “star-worthy” the repo looks to a new visitor by optimizing for **time-to-value, trust, and low friction**. Target: **95+/100**.
+
+| Category | Weight | Full-credit bar | Current score |
+|---|---:|---|---:|
+| Value proposition clarity | 15 | README explains *what it is* and *why it matters* in the first screen; includes “why star” bullets. | 15/15 |
+| Time-to-first-success | 15 | Copy/paste install + `/reload` + one obvious action (`F8` or `/cycle next`) works immediately. | 14/15 |
+| Proof (demo) | 10 | README includes a real demo GIF and provides a reproducible way to regenerate it. | 10/10 |
+| Trust & diagnostics | 15 | `/cycle doctor` exists; troubleshooting tells users what to do; errors are actionable. | 15/15 |
+| Compatibility & defaults | 10 | Defaults are OpenAI-focused and derived from `enabledModels`; skips unusable models; legacy config handled. | 10/10 |
+| Maintainership signals | 15 | CHANGELOG + RELEASE plan exist; minimal CI gate exists; semantic versioning expectations are clear. | 14/15 |
+| Community friction | 10 | Issue templates + PR template guide contributors and reduce maintainer triage load. | 10/10 |
+| Accuracy & guardrails | 10 | No overclaims; clear statements about limitations (e.g. context window vs billing quota). | 9/10 |
+
+**Stars readiness score: 97/100**
 
 ---
 
@@ -393,11 +419,14 @@ This rubric measures both product fit and implementation readiness. A public rel
 - [x] Only `/cycle` is registered.
 - [x] `SPEC.md` is inside `public/pi-cycle`.
 - [x] `FEATURES.md` captures the 95+/100 product idea.
-- [x] README exists.
+- [x] README exists and includes a demo GIF.
+- [x] `demo.tape` exists and can regenerate the GIF.
 - [x] LICENSE exists.
 - [x] CHANGELOG exists.
-- [ ] Automated package smoke check added.
-- [x] README expanded with defaults and troubleshooting.
+- [x] CONTRIBUTING + RELEASE docs exist.
+- [x] GitHub issue/PR templates exist.
+- [x] Minimal CI exists (npm pack dry-run).
+- [ ] Automated package smoke check added (beyond npm pack).
 
 ---
 
