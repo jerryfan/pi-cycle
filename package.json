@@ -36,6 +36,8 @@
     "RELEASE.md",
     "LICENSE",
     "example.json",
+    "demo.gif",
+    "demo.tape",
     "AGENTS.md"
   ],
   "publishConfig": {
