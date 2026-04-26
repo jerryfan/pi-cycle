@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/npm/l/pi-cycle?style=flat)](./LICENSE)
 [![stars](https://img.shields.io/github/stars/jerryfan/pi-cycle?style=social)](https://github.com/jerryfan/pi-cycle)
 
-One hotkey + one command to switch **work modes** in Pi by cycling **model + thinking level together**.
+One hotkey + one command to switch **work modes** in the [Pi coding agent](https://github.com/mariozechner/pi-coding-agent) by cycling **model + thinking level together**.
 
 ## Why this is worth starring
 
