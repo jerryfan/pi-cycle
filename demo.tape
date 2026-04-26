@@ -13,8 +13,8 @@ Set Width 1200
 Set Height 650
 Set TypingSpeed 55ms
 
+# Run from the repo folder (recommended: `cd public/pi-cycle` before running `vhs demo.tape`).
 # Use an isolated Pi agent dir so the demo doesn't touch your real ~/.pi
-Type "cd /c/code/pi/public/pi-cycle" Enter
 Type "export PI_CODING_AGENT_DIR=/c/trash/pi-cycle/2026-04-26-vhs-demo-r1/agent" Enter
 Type "rm -rf $PI_CODING_AGENT_DIR && mkdir -p $PI_CODING_AGENT_DIR" Enter
 Sleep 400ms
