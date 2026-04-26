@@ -1,5 +1,17 @@
 # pi-cycle Release Plan (lean, npm-first)
 
+## 0) Demo media (required)
+
+Render the README GIF:
+
+```bash
+cd public/pi-cycle
+vhs demo.tape
+# produces: demo.gif
+```
+
+Commit `demo.gif` and ensure README embeds it.
+
 ## 1) Quality gate (manual)
 
 Verify in a real Pi session:
