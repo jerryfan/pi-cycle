@@ -5,7 +5,7 @@
 Render the README GIF:
 
 ```bash
-vhs demo.tape
+bash tools/vhs/render-demo.sh
 # produces: demo.gif
 ```
 

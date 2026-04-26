@@ -37,7 +37,9 @@
     "LICENSE",
     "example.json",
     "demo.gif",
-    "demo.tape"
+    "demo.tape",
+    "VETERAN_PRACTICES.md",
+    "tools/vhs/render-demo.sh"
   ],
   "publishConfig": {
     "access": "public"

@@ -29,15 +29,14 @@ If this helps your daily Pi loop, star the repo → it directly drives maintenan
 
 ![pi-cycle demo](./demo.gif)
 
-This repo includes a `demo.tape` for [VHS](https://github.com/charmbracelet/vhs).
+This repo includes a `demo.tape` for [VHS](https://github.com/charmbracelet/vhs), but the README GIF is rendered as a **still-montage** (more reliable than a single take).
 
-To render the GIF locally (WSL recommended):
+To re-render `demo.gif` locally (WSL recommended):
 
 ```bash
 git clone https://github.com/jerryfan/pi-cycle
 cd pi-cycle
-vhs demo.tape
-# outputs: demo.gif
+bash tools/vhs/render-demo.sh
 ```
 
 ---
