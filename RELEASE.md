@@ -5,7 +5,6 @@
 Render the README GIF:
 
 ```bash
-cd public/pi-cycle
 vhs demo.tape
 # produces: demo.gif
 ```
@@ -48,5 +47,5 @@ npm publish --access public
 ## 4) GitHub release checklist
 
 - Ensure README has a GIF demo (`demo.gif`) and install snippet: `pi install npm:pi-cycle`
-- Tag: `pi-cycle-v<version>`
+- Tag: `v<version>`
 - GitHub release notes include changelog excerpt + demo GIF

@@ -13,7 +13,7 @@ Set Width 1200
 Set Height 650
 Set TypingSpeed 55ms
 
-# Run from the repo folder (recommended: `cd public/pi-cycle` before running `vhs demo.tape`).
+# Run from the repo folder before running `vhs demo.tape`.
 # Use an isolated Pi agent dir so the demo doesn't touch your real ~/.pi
 Type "export PI_CODING_AGENT_DIR=/tmp/pi-cycle-demo-agent" Enter
 Type "rm -rf $PI_CODING_AGENT_DIR && mkdir -p $PI_CODING_AGENT_DIR" Enter
@@ -22,7 +22,7 @@ Sleep 400ms
 Type "pi --version" Enter
 Sleep 700ms
 
-Type "pi install -l ." Enter
+Type "pi install . -l" Enter
 Sleep 1200ms
 
 # Start Pi offline (no startup network ops needed for the UI demo)

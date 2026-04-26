@@ -1,7 +1,8 @@
 # pi-cycle
 
-[![npm](https://img.shields.io/npm/v/pi-cycle?style=flat)](https://www.npmjs.com/package/pi-cycle)
-[![license](https://img.shields.io/npm/l/pi-cycle?style=flat)](./LICENSE)
+[![release](https://img.shields.io/github/v/release/jerryfan/pi-cycle?sort=semver&style=flat)](https://github.com/jerryfan/pi-cycle/releases)
+[![license](https://img.shields.io/github/license/jerryfan/pi-cycle?style=flat)](https://github.com/jerryfan/pi-cycle/blob/main/LICENSE)
+[![ci](https://img.shields.io/github/actions/workflow/status/jerryfan/pi-cycle/ci.yml?branch=main&style=flat)](https://github.com/jerryfan/pi-cycle/actions/workflows/ci.yml)
 [![stars](https://img.shields.io/github/stars/jerryfan/pi-cycle?style=social)](https://github.com/jerryfan/pi-cycle)
 
 One hotkey + one command to switch **work modes** in the [Pi coding agent](https://github.com/mariozechner/pi-coding-agent) by cycling **model + thinking level together**.
@@ -33,7 +34,8 @@ This repo includes a `demo.tape` for [VHS](https://github.com/charmbracelet/vhs)
 To render the GIF locally (WSL recommended):
 
 ```bash
-cd public/pi-cycle
+git clone https://github.com/jerryfan/pi-cycle
+cd pi-cycle
 vhs demo.tape
 # outputs: demo.gif
 ```
@@ -57,7 +59,7 @@ Then in Pi:
 Project-local install (shared via `.pi/settings.json`):
 
 ```bash
-pi install -l npm:pi-cycle
+pi install npm:pi-cycle -l
 ```
 
 ---
