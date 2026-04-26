@@ -26,16 +26,17 @@ If this helps your daily Pi loop, star the repo → it directly drives maintenan
 
 ## Demo (VHS)
 
+![pi-cycle demo](./demo.gif)
+
 This repo includes a `demo.tape` for [VHS](https://github.com/charmbracelet/vhs).
 
-To render a GIF locally:
+To render the GIF locally (WSL recommended):
 
 ```bash
+cd public/pi-cycle
 vhs demo.tape
 # outputs: demo.gif
 ```
-
-Note: rendering the GIF is best done in a normal terminal session (some headless/CI environments can hang).
 
 ---
 
