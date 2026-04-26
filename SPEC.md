@@ -2,17 +2,10 @@
 id: pi-cycle
 title: pi-cycle (Pi extension) — Product + Implementation Spec
 version: 0.1.0
-status: public-ready
-owner: jerry
-created_at: 2026-04-25
+status: public
 updated_at: 2026-04-26
-review_due: 2026-06-25
-change_policy: minor
-source_of_truth: true
 tags: [pi, extension, openai, model, thinking, hotkey, presets, workflow]
-risk_tier: low
 distribution: public
-quality_rating: 98/100
 ---
 
 # pi-cycle — Product + Implementation Spec
