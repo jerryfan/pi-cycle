@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+- Demo GIF is now rendered as a still-montage (no setup frames)
+- Demo includes `pi-oneliner` so model+thinking changes are visible
+- Add `tools/vhs/render-demo.sh` and `VETERAN_PRACTICES.md`
+
 ## 0.1.0
 - Initial public release as **`pi-cycle`**
 - Single command surface: `/cycle`
