@@ -14,8 +14,11 @@ One hotkey + one command to switch **work modes** in Pi by cycling **model + thi
 - **No UI clutter:** no footer/status artifacts (pairs nicely with `pi-oneliner`).
 - **Self-diagnosing:** `/cycle doctor` produces a report you can paste into issues.
 
+Quick facts:
 - Hotkey: **F8** (default) → cycle next profile
 - Command: **`/cycle`** → menu UI (all actions live under `/cycle ...`)
+- Provider focus: **OpenAI / OpenAI Codex**
+- Tested with Pi: **v0.70+**
 
 If this helps your daily Pi loop, star the repo → it directly drives maintenance time.
 
