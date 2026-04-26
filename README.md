@@ -6,6 +6,14 @@
 
 One hotkey + one command to switch **work modes** in Pi by cycling **model + thinking level together**.
 
+## Why this is worth starring
+
+- **Mode switch is atomic:** you never end up in a mismatched “model changed but thinking didn’t” state.
+- **Defaults that actually work:** prefers Pi’s `enabledModels` to avoid recommending unusable models.
+- **Doesn’t get stuck:** cycles past unauthorized/unsupported models with a warning.
+- **No UI clutter:** no footer/status artifacts (pairs nicely with `pi-oneliner`).
+- **Self-diagnosing:** `/cycle doctor` produces a report you can paste into issues.
+
 - Hotkey: **F8** (default) → cycle next profile
 - Command: **`/cycle`** → menu UI (all actions live under `/cycle ...`)
 
@@ -23,6 +31,8 @@ To render a GIF locally:
 vhs demo.tape
 # outputs: demo.gif
 ```
+
+Note: rendering the GIF is best done in a normal terminal session (some headless/CI environments can hang).
 
 ---
 
