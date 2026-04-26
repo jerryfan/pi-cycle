@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.2
+- Publish-ready: still-montage demo render script now works without sudo (sets a local npm prefix)
+
 ## 0.1.1
 - Demo GIF is now rendered as a still-montage (no setup frames)
 - Demo includes `pi-oneliner` so model+thinking changes are visible

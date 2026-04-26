@@ -1,6 +1,6 @@
 {
   "name": "pi-cycle",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pi extension: /cycle + hotkey cycles model+thinking profiles (OpenAI-focused) with a menu-based config UI for Pi coding agent.",
   "license": "MIT",
   "repository": {
