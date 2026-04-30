@@ -58,43 +58,43 @@ const HOTKEY_CHOICES: { key: KeyId; label: string }[] = [
 const DEFAULT_CONFIG: CycleConfigV1 = {
 	version: 1,
 	hotkey: DEFAULT_HOTKEY,
-	lowContext: { enabled: false, thresholdRemainingPercent: 10, capThinkingLevel: "low" },
-	active: "deep",
+	lowContext: { enabled: true, thresholdRemainingPercent: 10, capThinkingLevel: "low" },
+	active: "general",
 	profiles: [
 		{
 			name: "deep",
 			provider: "openai-codex",
 			model: "gpt-5.5",
 			thinkingLevel: "xhigh",
-			blurb: "Best for specs, architecture, and high-stakes review.",
+			blurb: "Best for specs, architecture, hard debugging, and high-stakes review.",
 		},
 		{
 			name: "code",
 			provider: "openai-codex",
-			model: "gpt-5.3-codex",
+			model: "gpt-5.5",
 			thinkingLevel: "high",
-			blurb: "Best for implementation, debugging, and refactors.",
+			blurb: "Best for implementation, debugging, refactors, and code review.",
 		},
 		{
 			name: "general",
 			provider: "openai-codex",
-			model: "gpt-5.4",
+			model: "gpt-5.5",
 			thinkingLevel: "medium",
-			blurb: "Best for everyday questions and balanced deep work.",
+			blurb: "Best default: strong reasoning quality with good cost and token balance.",
 		},
 		{
 			name: "fast",
 			provider: "openai-codex",
-			model: "gpt-5.4-mini",
+			model: "gpt-5.5",
 			thinkingLevel: "low",
-			blurb: "Best for quick iterations and small edits.",
+			blurb: "Best for quick iterations, small edits, and routine questions.",
 		},
 		{
 			name: "value",
 			provider: "openai-codex",
-			model: "gpt-5.2",
-			thinkingLevel: "medium",
-			blurb: "Best for throughput when you want solid answers at lower cost.",
+			model: "gpt-5.5",
+			thinkingLevel: "low",
+			blurb: "Best cheap-reasoning default; preferred over older GPT-5.x and mini variants.",
 		},
 	],
 };
@@ -186,33 +186,51 @@ function buildDefaultConfig(ctx: ExtensionContext): CycleConfigV1 {
 		}
 		return parsed[0];
 	};
+	const pickStrictModel = (...preds: Array<(m: { provider: string; model: string }) => boolean>) => {
+		for (const p of preds) {
+			const hit = pick(p);
+			if (hit) return hit;
+		}
+		return undefined;
+	};
+	const has = (m: { model: string }, needle: string) => m.model.toLowerCase().includes(needle);
+	const nonMini = (m: { model: string }) => !has(m, "mini");
 
+	// Presets optimize the workflow role, not model branding. GPT-5.5 is the
+	// current default family; older Codex/5.2 lines remain fallback-only, and
+	// mini is deliberately excluded from value because output-token efficiency matters there.
 	const deep = pickModel(
-		(m) => m.model.includes("gpt-5.5"),
-		(m) => m.model.includes("gpt-5.4") && !m.model.includes("mini"),
-		(m) => m.model.includes("gpt-5.3") && !m.model.includes("mini"),
-		(m) => m.model.includes("gpt-5.2"),
+		(m) => has(m, "gpt-5.5"),
+		(m) => has(m, "gpt-5.4") && nonMini(m),
+		(m) => has(m, "gpt-5.3") && nonMini(m),
+		(m) => has(m, "gpt-5.2"),
 	);
 	const code = pickModel(
-		(m) => m.model.includes("codex") && !m.model.includes("spark") && !m.model.includes("mini"),
-		(m) => m.model.includes("codex") && !m.model.includes("mini"),
-		(m) => m.model.includes("gpt-5.3"),
-	);
-	const fast = pickModel(
-		(m) => m.model.includes("mini"),
-		(m) => m.model.includes("spark"),
-		(m) => m.model.includes("gpt-5.2"),
-	);
-	const value = pickModel(
-		(m) => m.model.includes("gpt-5.2"),
-		(m) => m.model.includes("mini"),
-		(m) => m.model.includes("spark"),
+		(m) => has(m, "gpt-5.5"),
+		(m) => has(m, "gpt-5.3-codex") && nonMini(m),
+		(m) => has(m, "codex") && !has(m, "spark") && nonMini(m),
+		(m) => has(m, "gpt-5.4") && nonMini(m),
+		(m) => has(m, "gpt-5.2"),
 	);
 	const general = pickModel(
-		(m) => m.model.includes("gpt-5.4") && !m.model.includes("mini"),
-		(m) => m.model.includes("gpt-5.5"),
-		(m) => m.model.includes("gpt-5.3") && !m.model.includes("spark"),
-		(m) => m.model.includes("gpt-5.2"),
+		(m) => has(m, "gpt-5.5"),
+		(m) => has(m, "gpt-5.4") && nonMini(m),
+		(m) => has(m, "gpt-5.3") && !has(m, "spark") && nonMini(m),
+		(m) => has(m, "gpt-5.2"),
+	);
+	const fast = pickModel(
+		(m) => has(m, "gpt-5.5"),
+		(m) => has(m, "gpt-5.4") && nonMini(m),
+		(m) => has(m, "gpt-5.2"),
+		(m) => has(m, "spark"),
+		(m) => has(m, "mini"),
+	);
+	const value = pickStrictModel(
+		(m) => has(m, "gpt-5.5"),
+		(m) => has(m, "gpt-5.2"),
+		(m) => has(m, "gpt-5.4") && nonMini(m),
+		(m) => has(m, "gpt-5.3") && !has(m, "spark") && nonMini(m),
+		(m) => has(m, "codex") && !has(m, "spark") && nonMini(m),
 	);
 
 	const mkThinking = (provider: string, model: string, desired: ThinkingLevel): ThinkingLevel => {
@@ -225,7 +243,7 @@ function buildDefaultConfig(ctx: ExtensionContext): CycleConfigV1 {
 	const codeThinking = code ? mkThinking(code.provider, code.model, "high") : "high";
 	const generalThinking = general ? mkThinking(general.provider, general.model, "medium") : "medium";
 	const fastThinking = fast ? mkThinking(fast.provider, fast.model, "low") : "low";
-	const valueThinking = value ? mkThinking(value.provider, value.model, "medium") : "medium";
+	const valueThinking = value ? mkThinking(value.provider, value.model, "low") : "low";
 
 	const profiles: CycleProfile[] = [];
 	if (deep)
@@ -269,12 +287,14 @@ function buildDefaultConfig(ctx: ExtensionContext): CycleConfigV1 {
 			blurb: defaultBlurb("value"),
 		});
 
+	const defaultProfiles = profiles.length > 0 ? profiles : structuredClone(DEFAULT_CONFIG.profiles);
+
 	return {
 		version: 1,
 		hotkey: DEFAULT_HOTKEY,
-		lowContext: { enabled: false, thresholdRemainingPercent: 10, capThinkingLevel: "low" },
-		active: profiles[0]?.name,
-		profiles: profiles.length > 0 ? profiles : structuredClone(DEFAULT_CONFIG.profiles),
+		lowContext: { enabled: true, thresholdRemainingPercent: 10, capThinkingLevel: "low" },
+		active: defaultProfiles.some((p) => p.name === "general") ? "general" : defaultProfiles[0]?.name,
+		profiles: defaultProfiles,
 	};
 }
 
@@ -323,18 +343,18 @@ function writeConfigFile(cfg: CycleConfigV1): { ok: true } | { ok: false; error:
 function defaultBlurb(name: string): string {
 	switch (name.toLowerCase()) {
 		case "deep":
-			return "Best for specs, architecture, and high-stakes review.";
+			return "Best for specs, architecture, hard debugging, and high-stakes review.";
 		case "code":
-			return "Best for implementation, debugging, and refactors.";
+			return "Best for implementation, debugging, refactors, and code review.";
 		case "daily":
 		case "general":
-			return "Best for everyday questions and balanced deep work.";
+			return "Best default: strong reasoning quality with good cost and token balance.";
 		case "spark":
 			return "Best for fast coding-oriented work when you want speed.";
 		case "fast":
-			return "Best for quick iterations and small edits.";
+			return "Best for quick iterations, small edits, and routine questions.";
 		case "value":
-			return "Best for throughput when you want solid answers at lower cost.";
+			return "Best cheap-reasoning default; preferred over older GPT-5.x and mini variants.";
 		default:
 			return "";
 	}

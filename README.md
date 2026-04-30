@@ -77,13 +77,13 @@ pi install npm:pi-cycle -l
 
 | Order | Profile | Model | Thinking | Good for |
 |---:|---|---|---|---|
-| 1 | `deep` | `openai-codex/gpt-5.5` | `xhigh` | Specs, architecture, high-stakes review |
-| 2 | `code` | `openai-codex/gpt-5.3-codex` | `high` | Implementation, debugging, refactors |
-| 3 | `general` | `openai-codex/gpt-5.4` | `medium` | Everyday questions + balanced deep work |
-| 4 | `fast` | `openai-codex/gpt-5.4-mini` | `low` | Quick iterations and small edits |
-| 5 | `value` | `openai-codex/gpt-5.2` | `medium` | Throughput / value mode |
+| 1 | `deep` | `openai-codex/gpt-5.5` | `xhigh` | Specs, architecture, hard debugging, high-stakes review |
+| 2 | `code` | `openai-codex/gpt-5.5` | `high` | Implementation, debugging, refactors, code review |
+| 3 | `general` | `openai-codex/gpt-5.5` | `medium` | Best default: strong reasoning quality with good cost and token balance |
+| 4 | `fast` | `openai-codex/gpt-5.5` | `low` | Quick iterations, small edits, routine questions |
+| 5 | `value` | `openai-codex/gpt-5.5` | `low` | Cheap-reasoning default; preferred over older GPT-5.x and mini variants |
 
-Tip: `gpt-5.3-codex-spark` is usually best as a dedicated **spark** profile (fast coding-oriented, **no images**, smaller context) rather than your general daily mode.
+Tip: `gpt-5.2` and `gpt-5.3-codex` remain useful as legacy/fallback or quota-code profiles, but the default cycle now centers on GPT-5.5. Avoid using `gpt-5.4-mini` as the value preset because its output-token efficiency is poor for that job.
 
 ---
 

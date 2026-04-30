@@ -144,18 +144,18 @@ The extension MUST NOT register any additional top-level Pi commands. All user-f
 ---
 
 ## 5) Default OpenAI profile set
-The default profile set is optimized for the user’s current OpenAI/OpenAI Codex model family and designed to cover the common workflow spectrum without overwhelming the cycle.
+The default profile set is optimized for the job-to-be-done across intelligence/task quality, output-token efficiency, cost predictability, practical role in the cycle, and availability in OpenAI Codex provider mode. Current defaults center on GPT-5.5 based on recent benchmark evidence and first-principles preset design.
 
 | Order | Profile | Provider | Model | Thinking | Intended use |
 |---:|---|---|---|---|---|
-| 1 | `deep` | `openai-codex` | `gpt-5.5` | `xhigh` | Maximum-quality reasoning, specs, architecture, review. |
-| 2 | `code` | `openai-codex` | `gpt-5.3-codex` | `high` | Code implementation, debugging, refactoring. |
-| 3 | `general` | `openai-codex` | `gpt-5.4` | `medium` | Everyday questions and balanced deep work. |
-| 4 | `fast` | `openai-codex` | `gpt-5.4-mini` | `low` | Quick iterations, small edits, low-latency loops. |
-| 5 | `value` | `openai-codex` | `gpt-5.2` | `medium` | Value / throughput mode. |
+| 1 | `deep` | `openai-codex` | `gpt-5.5` | `xhigh` | Specs, architecture, hard debugging, high-stakes review. |
+| 2 | `code` | `openai-codex` | `gpt-5.5` | `high` | Implementation, debugging, refactors, code review. |
+| 3 | `general` | `openai-codex` | `gpt-5.5` | `medium` | Best default: strong reasoning quality with good cost and token balance. |
+| 4 | `fast` | `openai-codex` | `gpt-5.5` | `low` | Quick iterations, small edits, routine questions. |
+| 5 | `value` | `openai-codex` | `gpt-5.5` | `low` | Cheap-reasoning default; preferred over older GPT-5.x and mini variants. |
 
 ### 5.1 Why five profiles?
-Five is the intended default maximum for a public preset because it gives broad coverage without making the hotkey cycle feel like a carousel. Users may add more, but the shipped set should stay compact.
+Five is the intended default maximum for a public preset because it gives broad coverage without making the hotkey cycle feel like a carousel. Users may add more, including legacy/fallback profiles such as GPT-5.2 or GPT-5.3-Codex, but the shipped default cycle should stay compact and GPT-5.5-centered. GPT-5.4-mini should not be the value preset because its output-token efficiency is poor for that job.
 
 ---
 
@@ -179,18 +179,46 @@ For migration, the extension MAY read legacy config at:
   "version": 1,
   "hotkey": "f8",
   "lowContext": {
-    "enabled": false,
+    "enabled": true,
     "thresholdRemainingPercent": 10,
     "capThinkingLevel": "low"
   },
-  "active": "deep",
+  "active": "general",
   "profiles": [
     {
       "name": "deep",
       "provider": "openai-codex",
       "model": "gpt-5.5",
       "thinkingLevel": "xhigh",
-      "blurb": "Best for specs, architecture, and high-stakes review."
+      "blurb": "Best for specs, architecture, hard debugging, and high-stakes review."
+    },
+    {
+      "name": "code",
+      "provider": "openai-codex",
+      "model": "gpt-5.5",
+      "thinkingLevel": "high",
+      "blurb": "Best for implementation, debugging, refactors, and code review."
+    },
+    {
+      "name": "general",
+      "provider": "openai-codex",
+      "model": "gpt-5.5",
+      "thinkingLevel": "medium",
+      "blurb": "Best default: strong reasoning quality with good cost and token balance."
+    },
+    {
+      "name": "fast",
+      "provider": "openai-codex",
+      "model": "gpt-5.5",
+      "thinkingLevel": "low",
+      "blurb": "Best for quick iterations, small edits, and routine questions."
+    },
+    {
+      "name": "value",
+      "provider": "openai-codex",
+      "model": "gpt-5.5",
+      "thinkingLevel": "low",
+      "blurb": "Best cheap-reasoning default; preferred over older GPT-5.x and mini variants."
     }
   ]
 }

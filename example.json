@@ -2,46 +2,46 @@
   "version": 1,
   "hotkey": "f8",
   "lowContext": {
-    "enabled": false,
+    "enabled": true,
     "thresholdRemainingPercent": 10,
     "capThinkingLevel": "low"
   },
-  "active": "deep",
+  "active": "general",
   "profiles": [
     {
       "name": "deep",
       "provider": "openai-codex",
       "model": "gpt-5.5",
       "thinkingLevel": "xhigh",
-      "blurb": "Best for specs, architecture, and high-stakes review."
+      "blurb": "Best for specs, architecture, hard debugging, and high-stakes review."
     },
     {
       "name": "code",
       "provider": "openai-codex",
-      "model": "gpt-5.3-codex",
+      "model": "gpt-5.5",
       "thinkingLevel": "high",
-      "blurb": "Best for implementation, debugging, and refactors."
+      "blurb": "Best for implementation, debugging, refactors, and code review."
     },
     {
       "name": "general",
       "provider": "openai-codex",
-      "model": "gpt-5.4",
+      "model": "gpt-5.5",
       "thinkingLevel": "medium",
-      "blurb": "Best for everyday questions and balanced deep work."
+      "blurb": "Best default: strong reasoning quality with good cost and token balance."
     },
     {
       "name": "fast",
       "provider": "openai-codex",
-      "model": "gpt-5.4-mini",
+      "model": "gpt-5.5",
       "thinkingLevel": "low",
-      "blurb": "Best for quick iterations and small edits."
+      "blurb": "Best for quick iterations, small edits, and routine questions."
     },
     {
       "name": "value",
       "provider": "openai-codex",
-      "model": "gpt-5.2",
-      "thinkingLevel": "medium",
-      "blurb": "Best for throughput when you want solid answers at lower cost."
+      "model": "gpt-5.5",
+      "thinkingLevel": "low",
+      "blurb": "Best cheap-reasoning default; preferred over older GPT-5.x and mini variants."
     }
   ]
 }

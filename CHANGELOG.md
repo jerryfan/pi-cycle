@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+- Update bundled OpenAI/Codex defaults to a GPT-5.5-centered cycle: deep=xhigh, code=high, general=medium, fast/value=low
+- Make `general` the default active profile and enable the low-context thinking cap by default
+- Keep GPT-5.2 and GPT-5.3-Codex as fallback/legacy options, but remove them from the default cycle
+- Avoid GPT-5.4-mini as the value preset because of poor output-token efficiency for that role
+
 ## 0.1.2
 - Publish-ready: still-montage demo render script now works without sudo (sets a local npm prefix)
 

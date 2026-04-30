@@ -25,6 +25,9 @@ Rating target: **95+/100+**.
 
 5. **OpenAI-focused defaults that actually work**
    - Defaults are derived from Pi’s cached `enabledModels` when available.
+   - The bundled default cycle centers on GPT-5.5 across deep/code/general/fast/value modes.
+   - Keeps GPT-5.2 and GPT-5.3-Codex as legacy/fallback options without making them default presets.
+   - Does not use GPT-5.4-mini as the value preset because output-token efficiency matters for value mode.
    - Avoids recommending models that are present in registries but not usable for your account.
 
 6. **Clear feedback, low ambiguity**

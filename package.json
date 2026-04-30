@@ -11,6 +11,9 @@
   "bugs": {
     "url": "https://github.com/jerryfan/pi-cycle/issues"
   },
+  "scripts": {
+    "test": "node tests/defaults.test.mjs"
+  },
   "keywords": [
     "pi-package",
     "pi",
